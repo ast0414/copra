@@ -1,1 +1,1 @@
-# copra
+# COPRA: Constrained Prominence Adversarial Attack and Defense on Sparse and Discrete Clinical Data
