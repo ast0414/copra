@@ -14,14 +14,13 @@ from models import MLP
 
 parser = argparse.ArgumentParser()
 parser.add_argument('model_path', metavar='MODEL_PATH', help='path to the source model that will be used to craft examples')
-parser.add_argument('csr_path', metavar='CSR_PATH', help='path to feature data stored in pickled scipy CSR format')
-parser.add_argument('label_path', metavar='LABEL_PATH', help='path to true labels stored in pickled numpy 1D array')
+parser.add_argument('csr_path', metavar='CSR_PATH', help='path to feature data stored in a pickled scipy CSR format')
+parser.add_argument('label_path', metavar='LABEL_PATH', help='path to true labels stored in a pickled python list')
 parser.add_argument('--output_dir', type=str, default='./', help='output directory. Default=Current folder')
-parser.add_argument('--max-dist', type=int, default=20, help='maximum distortion')
-parser.add_argument('--early-stop', dest='early_stop', action='store_true', help='Early stop')
-parser.add_argument('--uncon', dest='constrained', action='store_false', help='craft unconstrained attacks')
-parser.add_argument('--no-cuda', dest='cuda', action='store_false', help='NOT use cuda')
-parser.add_argument('--name', type=str, default='', help='name of dataset. Default=None')
+parser.add_argument('--max-dist', type=int, default=20, help='maximum distortion. Default=20')
+parser.add_argument('--early-stop', dest='early_stop', action='store_true', help='Stop perturbing once the label is changed. Default=False')
+parser.add_argument('--uncon', dest='constrained', action='store_false', help='craft unconstrained attacks. Default=False')
+parser.add_argument('--no-cuda', dest='cuda', action='store_false', help='NOT use cuda. Default=False')
 parser.add_argument('--seed', type=int, default=0, help='random seed to use. Default=0')
 parser.set_defaults(cuda=True, constrained=True, early_stop=False)
 
@@ -174,8 +173,6 @@ def craft_adv_samples(data_loader, model, max_dist=20, constrained=True, early_s
 
 if __name__ == '__main__':
 	args = parser.parse_args()
-	if args.name != '':
-		args.name = args.name + '_'
 
 	np.random.seed(args.seed)
 	torch.manual_seed(args.seed)

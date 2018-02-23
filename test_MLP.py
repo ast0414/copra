@@ -14,8 +14,8 @@ from models import MLP
 
 parser = argparse.ArgumentParser()
 parser.add_argument('model_path', metavar='MODEL_PATH', help='path to a trained model')
-parser.add_argument('csr_path', metavar='CSR_PATH', help='path to feature data stored in pickled scipy CSR format')
-parser.add_argument('label_path', metavar='LABEL_PATH', help='path to true labels stored in pickled numpy 1D array')
+parser.add_argument('csr_path', metavar='CSR_PATH', help='path to feature data stored in a pickled scipy CSR format')
+parser.add_argument('label_path', metavar='LABEL_PATH', help='path to true labels stored in a pickled python list')
 parser.add_argument('--eval_batch_size', type=int, default=512, help='batch size for eval mode. Default=512')
 parser.add_argument('--no-cuda', dest='cuda', action='store_false', help='NOT use cuda')
 parser.add_argument('--seed', type=int, default=0, help='random seed to use. Default=0')
